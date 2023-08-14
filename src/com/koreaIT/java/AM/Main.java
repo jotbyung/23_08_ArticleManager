@@ -36,7 +36,30 @@ public class Main {
         articles.add(article);
 
         System.out.printf("%d 번 글이 생성 되었습니다\n", id);
-      } else if (cmd.startsWith("article detail")) {
+      }
+      else if (cmd.startsWith("article delete")) {
+        String[] cmdBits = cmd.split(" ");
+        int id = Integer.parseInt(cmdBits[2]);
+
+        Article deleteArticle = null;
+
+        for (int i = 0; i < articles.size(); i++) {
+          Article article = articles.get(i);
+          if (article.id == id) {
+            deleteArticle = article;
+            articles.remove(i-0);
+            System.out.printf("%d번 게시글이 삭제되었습니다.\n",id);
+            break;
+          }
+        }
+
+        if (deleteArticle == null) {
+          System.out.printf("%d번 게시글은 존재하지 않습니다.\n", id);
+          continue;
+        }
+      }
+
+      else if (cmd.startsWith("article detail")) {
         String[] cmdBits = cmd.split(" ");
         int id = Integer.parseInt(cmdBits[2]);
 
@@ -96,15 +119,6 @@ class Article {
 
 }
 
-// 명령어) article detail 1
-//게시물이 없는 경우
-//1번 게시물은 존재하지 않습니다
-//게시물이 있는 경우
-//번호 : 1
-//날짜 현재 날짜와 사긴
-//제목 : ~~
-//내용 : ~~
-//
 //명령어 ) article delete 1
 //1번 게시물이 없는 경우
 //1번 게시물은 존재하지 않습니다
